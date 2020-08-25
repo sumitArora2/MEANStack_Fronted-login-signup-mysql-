@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="jumbotron mt-5">
+    <div class="col-sm-8 mx-auto">
+      <h1 class="text-center">WELCOME</h1>
+    </div>
+  </div>
+</div>
+<!-- <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Please add the college" [(ngModel)]="college_name">
+  <div class="input-group-append" (click)="AddCollege()">
+    <span class="input-group-text">Add College</span>
+  </div>
+</div> -->
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let college of colleges">{{college.college_name}}</li>
+</ul>

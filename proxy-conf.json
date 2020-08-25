@@ -1,0 +1,6 @@
+{
+  "/users": {
+    "target": "https://loginmysql06.herokuapp.com",
+    "secure": false
+  }
+}
