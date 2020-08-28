@@ -28,6 +28,11 @@
             <option *ngFor="let college of colleges" >{{college.college_name}}</option>
           </select>
         </div>
+        <div class="form-group">
+          <select class="form-control" id="sel1" (change)="selectRole($event)" formControlName="role_name">
+            <option *ngFor="let role of roles" >{{role.role_name}}</option>
+          </select>
+        </div>
         <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!this.signupForm.valid">Register!</button>
       </form>
     </div>

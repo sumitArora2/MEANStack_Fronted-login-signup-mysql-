@@ -9,6 +9,7 @@ import { FormControl, Validators, FormGroup} from '@angular/forms';
 })
 export class RegisterComponent implements OnInit{
   colleges:any
+  roles:any
   signupForm: FormGroup;
   credentials: TokenPayload = {
     id: 0,
@@ -40,12 +41,24 @@ export class RegisterComponent implements OnInit{
       'last_name' : new FormControl('',[Validators.required,Validators.maxLength(25)]),
       'email' : new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
       'password' : new FormControl('',[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
-      'college_name': new FormControl('',[Validators.required])
+      'college_name': new FormControl('',[Validators.required]),
+      'role_name': new FormControl(null,[Validators.required])
   });
+  this.auth.getRoles().subscribe(
+    user => {
+      this.roles = user
+    },
+    err => {
+      console.error(err)
+    }
+  )
   }
   selectCollege(event){
   this.credentials.college_name=event.target.value;
   this.signupForm.value.college_name=event.target.value
+  }
+  selectRole(event){
+    this.signupForm.value.role_name=event.target.value
   }
   register() {
     console.log(this.signupForm.value);

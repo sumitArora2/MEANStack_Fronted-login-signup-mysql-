@@ -9,6 +9,7 @@ import { FormControl, Validators, FormGroup} from '@angular/forms';
 })
 export class LoginComponent implements OnInit{
   colleges:any
+  roles:any;
   signinForm:FormGroup; 
   credentials: TokenPayload = {
     id: 0,
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit{
         Validators.required,
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),     
       'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
-      'college_name': new FormControl(null,[Validators.required])
+      'college_name': new FormControl(null,[Validators.required]),
+      'role_name': new FormControl(null,[Validators.required]),
   });
    if(this.auth.isLoggedIn()){
     this.router.navigateByUrl('/profile');
@@ -43,10 +45,21 @@ export class LoginComponent implements OnInit{
       console.error(err)
     }
   )
+  this.auth.getRoles().subscribe(
+    user => {
+      this.roles = user
+    },
+    err => {
+      console.error(err)
+    }
+  )
   }
   selectCollege(event){
     this.credentials.college_name=event.target.value;
     this.signinForm.value.college_name=event.target.value
+    }
+    selectRole(event){
+      this.signinForm.value.role_name=event.target.value
     }
   login() {
     console.log("this.signinForm.",this.signinForm)
@@ -54,12 +67,19 @@ export class LoginComponent implements OnInit{
     if(this.signinForm.valid){
     this.auth.login(this.signinForm.value).subscribe(
       (data) => {
-        console.log(data);
-        this.toaster.open({
-          text: "You Loggedin successfully",
-          type: 'success',
-        });
-        this.router.navigateByUrl('/profile')
+        if(data.success){
+          console.log(data);
+          this.toaster.open({
+            text: "You Loggedin successfully",
+            type: 'success',
+          });
+          this.router.navigateByUrl('/profile')
+        }else{
+          this.toaster.open({
+            text: data.message,
+            type: 'danger',
+          });
+        }
       },
       err => {
         console.log(err.error.message);

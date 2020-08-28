@@ -32,12 +32,17 @@ export interface TokenPayload {
 @Injectable()
 export class AuthenticationService {
   private token: string
-  apiUrl = 'https://loginmysql06.herokuapp.com';
+  apiUrl = 'https://login-mongodb06.herokuapp.com';
+  // apiUrl='http://localhost:3000'
   constructor(private http: HttpClient, private router: Router) {}
 
   private saveToken(token: string): void {
     localStorage.setItem('usertoken', token)
     this.token = token
+  }
+
+   removeToken(){
+    localStorage.removeItem('usertoken');
   }
 
   private getToken(): string {
@@ -67,11 +72,15 @@ export class AuthenticationService {
       return false
     }
   }
-
+  public updateProfile(id,data){
+    return this.http.post(`${this.apiUrl}/users/updateProfile/${id}`, data);
+  }
   public register(user: TokenPayload): Observable<any> {
     return this.http.post(`${this.apiUrl}/users/register`, user)
   }
-
+  public deleteProfile(id): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/deleteProfile`,{id:id})
+  }
   public login(user: TokenPayload): Observable<any> {
     const base = this.http.post(`${this.apiUrl}/users/login`, user)
 
@@ -98,4 +107,7 @@ export class AuthenticationService {
     window.localStorage.removeItem('usertoken')
     this.router.navigateByUrl('/')
   }
+ public getRoles(): Observable<any>{
+  return this.http.get(`${this.apiUrl}/users/getRole`);
+ }
 }

@@ -10,7 +10,8 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class CollegeService {
-  apiUrl = 'https://loginmysql06.herokuapp.com';
+  apiUrl = 'https://login-mongodb06.herokuapp.com';
+  // apiUrl='http://localhost:3000'
   constructor(private http: HttpClient, private router: Router) {
 
   }

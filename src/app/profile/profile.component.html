@@ -2,8 +2,11 @@
   <div class="jumbotron mt-5">
     <div class="col-sm-8 mx-auto">
       <h1 class="text-center">PROFILE</h1>
-    </div>
-    <table class="table col-md-6 mx-auto">
+      <button type="button" class="btn btn-primary" routerLink="/updateProfile">Edit</button>
+      <button type="button" class="btn btn-success" (click)="downloadProfile()" style="margin-left: 1%;">Download My Profile</button>
+      <button type="button" class="btn btn-danger" (click)="deleteAccount()" style="margin-left: 1%;">Delete Account</button>
+    </div> 
+    <table class="table col-md-6 mx-auto" id="element-to-export">
       <tr>
         <td>Fist Name</td>
         <td>{{ details?.first_name }}</td>

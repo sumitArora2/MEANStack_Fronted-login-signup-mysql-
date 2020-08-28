@@ -14,6 +14,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { CollegeService } from './college.service';
 import { ToastNotificationsModule } from "ngx-toast-notifications";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuardService]
-  }
+  },
+  { path: 'updateProfile', component: UpdateProfileComponent }
 ]
 
 @NgModule({
@@ -31,7 +33,8 @@ const routes: Routes = [
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

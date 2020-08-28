@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 mt-5 mx-auto">
+        <form (submit)="update()" [formGroup]="updateForm">
+          <h1 class="h3 mb-3 font-weight-normal">Update Profile</h1>
+          <div class="form-group">
+            <label for="name">First name</label>
+            <input type="text" class="form-control" name="first_name" formControlName="first_name" placeholder="Enter your first name" >
+            <span *ngIf="!updateForm.get('first_name').valid && updateForm.get('first_name').touched" class="text-danger">Please Enter Your first Name</span>
+          </div>
+          <div class="form-group">
+            <label for="name">Last name</label>
+            <input type="text" class="form-control" name="last_name" formControlName="last_name" placeholder="Enter your lastname name">
+            <span *ngIf="!updateForm.get('last_name').valid && updateForm.get('last_name').touched" class="text-danger">Please Enter Your last Name</span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" formControlName="email" placeholder="Enter email">
+          <span *ngIf="!updateForm.get('email').valid && updateForm.get('email').touched" class="text-danger">Please Enter Your valid Email Address</span>
+          </div>
+          <!-- <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" formControlName="password" placeholder="Password">
+            <span *ngIf="!updateForm.get('password').valid && updateForm.get('password').touched" class="text-danger">Please Enter Your Password</span>
+          </div> -->
+          <div class="form-group">
+            <select class="form-control" id="sel1" (change)="selectCollege($event)" formControlName="college_name">
+              <option *ngFor="let college of colleges" >{{college.college_name}}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!this.updateForm.valid">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
